@@ -1,0 +1,28 @@
+Dataset: Aleatorios, 
+Size: a100.txt, 
+Tempo(ms), Swaps, 
+0.0107, 597, 
+0.0093, 433, 
+
+
+Dataset: Ordenados, 
+Size: o100.txt, 
+Tempo(ms), Swaps, 
+0.0082, 514, 
+0.0083, 534, 
+
+
+Dataset: Decrescentes, 
+Size: d100.txt, 
+Tempo(ms), Swaps, 
+0.0107, 502, 
+0.0081, 443, 
+
+
+Dataset: ParcialmenteOrdenados, 
+Size: po100.txt, 
+Tempo(ms), Swaps, 
+0.0085, 431, 
+0.0265, 590, 
+
+
