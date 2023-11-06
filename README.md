@@ -40,3 +40,5 @@ O que varia no custo dessa parte do algortimo é a funcao de selecao de pivot, q
 - random: 6
 
 Porem note que o custo é constante, portanto nao ira influenciar no custo assintotico.
+
+Nos algoritmos random e median que se utilizam de valores randomicos para selecionar o elemento pivo, podemos notar uma leve variacao na quantidade de swaps realizados, porem isso so se tem visivel em conjuntos de N muito grandes, nao sendo praticamente perceptivel ou fazendo tanta diferenca para conjuntos menores.
