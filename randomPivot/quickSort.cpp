@@ -95,13 +95,12 @@ void printArray(vector < int > & data) {
 }
 
 int main() {
-    srand((unsigned)time(NULL));
 
 	ofstream csvFile;
     csvFile.open(RESULT_FILENAME);
 
     const int dataSets = sizeof(PATH)/sizeof(*PATH);
-    const int numTests = 10;
+    const int numTests = 32;
     
 
     for (int i = 0; i < dataSets; i++) {
@@ -119,7 +118,8 @@ int main() {
             csvFile << "\n";
 
             for (int test = 0; test < numTests; test++) {
-
+                
+                srand((unsigned)time(NULL));
                 vector < int > data;
                 getFileContent(entry.path().string(), data);
                 int dataSize = data.size();

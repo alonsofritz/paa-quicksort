@@ -28,20 +28,20 @@ void swap(int * a, int * b) {
 	SWAP_COUNT++;
 }
 
-int selectMedianPivot(int start, int end) {
+int selectMedianPivot(int start, int end) { // total: 28
     vector<int> valoresAleatorios;
-    const int a = start + rand() % (end - start);
-    const int b = start + rand() % (end - start);
-    const int c = start + rand() % (end - start);
-    const int min_value = min(a, min(b, c));
-    const int max_value = max(a, max(b, c));
+    const int a = start + rand() % (end - start); // 5
+    const int b = start + rand() % (end - start); // 5
+    const int c = start + rand() % (end - start); // 5
+    const int min_value = min(a, min(b, c)); // 3
+    const int max_value = max(a, max(b, c)); // 3
 
-    if (a != min_value && a != max_value) {
-        return a;
-    } else if (b != min_value && b != max_value) {
-        return b;
+    if (a != min_value && a != max_value) { // 3
+        return a;   // 1
+    } else if (b != min_value && b != max_value) { //3
+        return b;   // 1
     } else {
-        return c;
+        return c;   // 1
     }
 }
 
@@ -109,13 +109,12 @@ void printArray(vector<int> &data) {
 }
 
 int main() {
-	srand(time(NULL));
-    
+
     ofstream csvFile;
     csvFile.open(RESULT_FILENAME);
 
     const int dataSets = sizeof(PATH)/sizeof(*PATH);
-    const int numTests = 10;
+    const int numTests = 32;
     
 
     for (int i = 0; i < dataSets; i++) {
@@ -134,6 +133,7 @@ int main() {
 
             for (int test = 0; test < numTests; test++) {
 
+                srand((unsigned)time(NULL));
                 vector<int> data;
                 getFileContent(entry.path().string(), data);
                 int dataSize = data.size();

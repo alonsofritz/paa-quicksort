@@ -21,43 +21,44 @@ string PATH[] = {
     DATABASE_PATH + "/ParcialmenteOrdenados"
 };
 
-void swap(int * a, int * b) {
-    int t = * a;
-    * a = * b;
-    * b = t;
-	SWAP_COUNT++;
+void swap(int *a, int *b) { // total: 8 
+    int t = *a;    // 2
+    *a = *b;        // 3
+    *b = t;         // 2
+	SWAP_COUNT++;      // 1
 }
 
 int selectCentralPivot(int start, int end) {
-    return start + floor((end - start) / 2);
+    return start + floor((end - start) / 2); // 5
 }
 
-int partition(vector < int > & arr, int start, int end) {
+int partition(vector < int > & arr, int start, int end) { //total: 15n + 34 
 
-	int pivotIndex = selectCentralPivot(start, end);
-	int pivot = arr[pivotIndex];
+	int pivotIndex = selectCentralPivot(start, end); // 5 + 1 = 6
+	int pivot = arr[pivotIndex]; // 2
 
-	swap(&arr[pivotIndex], &arr[end]);
+	swap(&arr[pivotIndex], &arr[end]); // swap[8] + 2 = 10
 
-	int i = (start - 1);
+	int i = (start - 1); // 2
 
-	for (int j = start; j < end; j++) {
-		if (arr[j] < pivot)	{
-			i++;
-			swap(&arr[i], &arr[j]);
+	for (int j = start; j < end; j++) { // 2n+2
+		if (arr[j] < pivot)	{           // 2n
+			i++;                           // 1
+			swap(&arr[i], &arr[j]);     // swap[8] + 2 = 10
 		}
 	}
+    // TOTAL: 2n+2+2n+11n = 15n+2 
 	
-	swap(&arr[i + 1], &arr[end]);
+	swap(&arr[i + 1], &arr[end]);   // swap[8] + 2 = 10
 	
-	return (i + 1);
+	return (i + 1); // 2
 }
 
 void quickSort(vector < int > & arr, int start, int end)
 {
-	if (start >= end) return;	// Base case
+	if (start >= end) return;	// Base case 2
 
-	int p = partition(arr, start, end);
+	int p = partition(arr, start, end); // 15n+34
 	
 	// Sorting the left part
 	quickSort(arr, start, p - 1);
@@ -99,7 +100,7 @@ int main() {
     csvFile.open(RESULT_FILENAME);
 
     const int dataSets = sizeof(PATH)/sizeof(*PATH);
-    const int numTests = 10;
+    const int numTests = 32;
     
 
     for (int i = 0; i < dataSets; i++) {
