@@ -9,10 +9,10 @@ using namespace std;
 namespace fs = std::filesystem;
 
 int SWAP_COUNT = 0;
-string RESULT_FILENAME = "resultsV1.csv";
+string RESULT_FILENAME = "resultsRandomPivot.csv";
 string DATABASE_NAME = "database";
 string DATABASE_TEST_NAME = "database_test";
-string DATABASE_PATH = "../" + DATABASE_TEST_NAME;
+string DATABASE_PATH = "./" + DATABASE_NAME;
 string PATH[] = {
     DATABASE_PATH + "/Aleatorios",
     DATABASE_PATH + "/Ordenados",
@@ -101,7 +101,7 @@ int main() {
     csvFile.open(RESULT_FILENAME);
 
     const int dataSets = sizeof(PATH)/sizeof(*PATH);
-    const int numTests = 2;
+    const int numTests = 10;
     
 
     for (int i = 0; i < dataSets; i++) {

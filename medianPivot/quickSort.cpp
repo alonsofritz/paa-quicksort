@@ -10,10 +10,10 @@ using namespace std;
 namespace fs = std::filesystem;
 
 int SWAP_COUNT = 0;
-string RESULT_FILENAME = "resultsV2.csv";
+string RESULT_FILENAME = "resultsMedianPivot.csv";
 string DATABASE_NAME = "database";
 string DATABASE_TEST_NAME = "database_test";
-string DATABASE_PATH = "../" + DATABASE_TEST_NAME;
+string DATABASE_PATH = "./" + DATABASE_NAME;
 string PATH[] = {
     DATABASE_PATH + "/Aleatorios",
     DATABASE_PATH + "/Ordenados",
@@ -28,13 +28,27 @@ void swap(int * a, int * b) {
 	SWAP_COUNT++;
 }
 
-int selectCentralPivot(int start, int end) {
-    return start + floor((end - start) / 2);
+int selectMedianPivot(int start, int end) {
+    vector<int> valoresAleatorios;
+    const int a = start + rand() % (end - start);
+    const int b = start + rand() % (end - start);
+    const int c = start + rand() % (end - start);
+    const int min_value = min(a, min(b, c));
+    const int max_value = max(a, max(b, c));
+
+    if (a != min_value && a != max_value) {
+        return a;
+    } else if (b != min_value && b != max_value) {
+        return b;
+    } else {
+        return c;
+    }
 }
 
-int partition(vector < int > & arr, int start, int end) {
+int partition(vector<int> &arr, int start, int end) {
 
-	int pivotIndex = selectCentralPivot(start, end);
+	// Select pivot randomly
+	int pivotIndex = selectMedianPivot(start, end);
 	int pivot = arr[pivotIndex];
 
 	swap(&arr[pivotIndex], &arr[end]);
@@ -53,7 +67,7 @@ int partition(vector < int > & arr, int start, int end) {
 	return (i + 1);
 }
 
-void quickSort(vector < int > & arr, int start, int end)
+void quickSort(vector<int> &arr, int start, int end)
 {
 	if (start >= end) return;	// Base case
 
@@ -66,7 +80,7 @@ void quickSort(vector < int > & arr, int start, int end)
 	quickSort(arr, p + 1, end);
 }
 
-bool getFileContent(string fileName, vector < int > & data) {
+bool getFileContent(string fileName, vector<int> &data) {
 
     ifstream in (fileName);
 
@@ -86,20 +100,22 @@ bool getFileContent(string fileName, vector < int > & data) {
     return true;
 }
 
-void printArray(vector < int > & data) {
+void printArray(vector<int> &data) {
     cout << "Sorted array: \n";
-	for (const auto & i: data) {
+	for (const auto &i: data) {
         cout << i << ", ";
     }
     cout << endl << endl;
 }
 
 int main() {
-	ofstream csvFile;
+	srand(time(NULL));
+    
+    ofstream csvFile;
     csvFile.open(RESULT_FILENAME);
 
     const int dataSets = sizeof(PATH)/sizeof(*PATH);
-    const int numTests = 2;
+    const int numTests = 10;
     
 
     for (int i = 0; i < dataSets; i++) {
@@ -109,7 +125,7 @@ int main() {
         csvFile << "Dataset: " << path.substr(DATABASE_PATH.length() + 1) << ", ";
         csvFile << "\n";
 
-        for (const auto & entry: fs::directory_iterator(path)) {
+        for (const auto &entry: fs::directory_iterator(path)) {
         
             csvFile << "Size: " << (entry.path().string()).substr(path.length() + 1) << ", ";
             csvFile << "\n";
@@ -118,7 +134,7 @@ int main() {
 
             for (int test = 0; test < numTests; test++) {
 
-                vector < int > data;
+                vector<int> data;
                 getFileContent(entry.path().string(), data);
                 int dataSize = data.size();
 
